@@ -26,31 +26,12 @@ try:
     chat_input_box.send_keys(message)
     # 엔터 키를 눌러 메시지를 전송합니다.
     chat_input_box.send_keys(Keys.RETURN)
-    #해변가기
-    time.sleep(3)
-    element = driver.find_element(By.CLASS_NAME, "IconContainer_slop__N7kdz")
-    element.click()
-    #카메라끄기
-    svg_element = driver.find_element(By.CSS_SELECTOR, "svg[data-sentry-component='VideoFillIcon']")
-    svg_element.click()
+
     #600초 뒤인 10분
     time.sleep(600)
     message = "복귀하였습니다."
 
     button_to_click = driver.find_element(By.CSS_SELECTOR, "#floatingContainer > div:nth-child(2) > img")
-    #자리복귀
-    time.sleep(3)
-    button_to_click.click()
-
-    selector = "#play-ui-layout > div.px-safe.relative.flex.flex-1.flex-col.overflow-hidden > div.z-dock.pb-safe-or-\\[16px\\].fixed.bottom-0.left-1\\/2.flex.-translate-x-1\\/2.flex-col.items-center.gap-\\[8px\\] > div.pointer-events-auto.flex.h-\\[48px\\].items-center.gap-\\[4px\\].rounded-full.bg-white\\/\\[0.9\\].px-\\[16px\\] > div.flex.gap-\\[2px\\] > div:nth-child(2) > div.Tooltip_trigger__nNDnu > button"
-
-    #카메라 켜기
-    time.sleep(3)
-    element = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, selector))
-    )
-    element.click()
-    print("버튼을 성공적으로 클릭했습니다.")
 
     print("요소를 성공적으로 클릭했습니다.")
     chat_input_box.send_keys(message)
