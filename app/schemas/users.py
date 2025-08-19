@@ -1,11 +1,14 @@
 from enum import Enum
 from typing import Optional
+
 from pydantic import BaseModel, Field
+
 
 # 성별을 위한 Enum 정의
 class Gender(str, Enum):
     male = "male"
     female = "female"
+
 
 # 유저 생성 요청 데이터의 스키마
 class UserCreateRequest(BaseModel):

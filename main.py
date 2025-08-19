@@ -1,8 +1,9 @@
-from typing import Annotated, List, Dict, Optional
+from enum import Enum
+from typing import Annotated, Dict, List, Optional
+
 import uvicorn
 from fastapi import FastAPI, HTTPException, Path, Query
 from pydantic import BaseModel, Field
-from enum import Enum
 
 
 # 성별을 위한 Enum 정의
@@ -65,7 +66,7 @@ class UserModel:
     def get(cls, id: int) -> Optional[Dict]:
         """특정 ID의 사용자 정보 반환"""
         for user in cls._users:
-            if user['id'] == id:
+            if user["id"] == id:
                 return user
         return None
 
@@ -106,7 +107,7 @@ app = FastAPI()
 UserModel.create_dummy()
 
 
-@app.post('/users', response_model=Dict)
+@app.post("/users", response_model=Dict)
 async def create_user(data: UserCreateRequest):
     """
     새로운 사용자를 생성합니다.
@@ -117,7 +118,7 @@ async def create_user(data: UserCreateRequest):
     return {"id": user.id}
 
 
-@app.get('/users/search', response_model=List[UserResponse])
+@app.get("/users/search", response_model=List[UserResponse])
 async def search_users(query_params: Annotated[UserSearchParams, Query()]):
     """
     쿼리 매개변수를 이용해 사용자를 검색합니다.
@@ -132,7 +133,7 @@ async def search_users(query_params: Annotated[UserSearchParams, Query()]):
     return filtered_users
 
 
-@app.get('/users', response_model=List[UserResponse])
+@app.get("/users", response_model=List[UserResponse])
 async def get_all_users():
     """
     모든 사용자 목록을 조회합니다.
@@ -143,7 +144,7 @@ async def get_all_users():
     return result
 
 
-@app.get('/users/{user_id}', response_model=UserResponse)
+@app.get("/users/{user_id}", response_model=UserResponse)
 async def get_user(user_id: Annotated[int, Path(gt=0)]):
     """
     특정 ID를 가진 사용자 정보를 조회합니다.
@@ -155,7 +156,7 @@ async def get_user(user_id: Annotated[int, Path(gt=0)]):
     return user
 
 
-@app.patch('/users/{user_id}', response_model=UserResponse)
+@app.patch("/users/{user_id}", response_model=UserResponse)
 async def update_user(user_id: Annotated[int, Path(gt=0)], data: UserUpdateRequest):
     """
     특정 ID를 가진 사용자 정보를 부분적으로 수정합니다.
@@ -170,7 +171,7 @@ async def update_user(user_id: Annotated[int, Path(gt=0)], data: UserUpdateReque
     return user
 
 
-@app.delete('/users/{user_id}')
+@app.delete("/users/{user_id}")
 async def delete_user(user_id: Annotated[int, Path(gt=0)]):
     """
     특정 ID를 가진 사용자를 삭제합니다.
@@ -179,8 +180,8 @@ async def delete_user(user_id: Annotated[int, Path(gt=0)]):
     if not is_deleted:
         raise HTTPException(status_code=404, detail=f"User with ID {user_id} not found")
 
-    return {'detail': f'User {user_id} successfully deleted.'}
+    return {"detail": f"User {user_id} successfully deleted."}
 
 
-if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0', port=8000)
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
