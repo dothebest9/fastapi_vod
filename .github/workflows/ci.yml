@@ -1,12 +1,9 @@
 name: ci
 
-
 on:
   push:
-
-
-
-
+    branches:
+      - main
 
 jobs:
   static-analysis:
@@ -15,18 +12,15 @@ jobs:
       - name: Check out the codes
         uses: actions/checkout@v4
 
-      - name: Setup python environment
-        id: setup-python
-        uses: actions/setup-python@v2
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v4
         with:
           python-version: "3.13"
 
       - name: Install Poetry
-        run: |
-          curl -sSL https://install.python-poetry.org | python3 - --version 1.8.5
-
-      - name: Register Poetry bin
-        run: echo "${HOME}/.poetry/bin" >> $GITHUB_PATH
+        uses: snok/install-poetry@v1
+        with:
+          version: 1.8.5
 
       - name: Install dependencies
         run: poetry install --no-root
@@ -46,16 +40,17 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Check out the codes
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
         uses: actions/setup-python@v4
         with:
           python-version: "3.13"
 
       - name: Install Poetry
-        run: |
-          curl -sSL https://install.python-poetry.org | python3 - --version 1.8.5
-
-      - name: Register Poetry bin
-        run: echo "${HOME}/.poetry/bin" >> $GITHUB_PATH
+        uses: snok/install-poetry@v1
+        with:
+          version: 1.8.5
 
       - name: Install dependencies
         run: poetry install --no-root
@@ -63,4 +58,4 @@ jobs:
       - name: Run tests
         run: |
           poetry run coverage run -m pytest .
-          poetry run coverage run report -m
+          poetry run coverage report -m
