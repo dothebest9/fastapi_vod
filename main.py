@@ -19,6 +19,7 @@ class UserCreateRequest(BaseModel):
     gender: Gender
 
 
+
 class UserUpdateRequest(BaseModel):
     username: Optional[str] = None
     email: Optional[str] = None
