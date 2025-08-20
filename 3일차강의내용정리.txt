@@ -1,1 +1,26 @@
-1.
+1. ORJson을 왜써야 하는가
+    json보다 빠른 처리속도
+    나는
+    8.249011200001405
+    2.232142199998634
+    이렇게 나왔다 3배나 차이나는 속도를 경험
+    그외 timeit을 써서 다른 객체에 써서 내코드와 다른사람코드중
+    속도빠른걸 쓰는걸 택하는게 효율적이라는 판단
+2. dto=Data Transfer Object
+    전달에 쓰이는 객체 다른 코드의 개입 X 만약에 개입이되면
+    dto가 아니게된다
+    dict를 쓰지말것 swagger에서 예제를 하면서 실제값과 도출값이
+    다른걸 발견
+3. alphanumeric,sqids
+    unique를 써서 고유하고 encode(uuid.uuid4().int))를 쓰면서
+    순식간에 랜덤하면서 고유한 숫자가 나옴 sqids를 써봤으나
+    uuid에 비해 sqids는 30배 이상 차이났었다
+    uuid는 0.2초정도에비해 sqids 6초가량나옴
+4. debug
+    디버그하는 방법의 개념 아직도 이해는 100%는 안되지만
+    내가 느낀바는 의심이가는? 코드에서 다음코드 하나 하나 서술하는느낌
+    https://www.jetbrains.com/help/pycharm/stepping-through-the-program.html
+
+5.  자주쓴 표현
+    ./test.sh : 처음시작하기전 코드문제없는지 확인
+    ctrl+shift+enter : 밑줄그어진곳에 from,import를 직접안적어도 참조해준다
