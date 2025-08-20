@@ -36,6 +36,7 @@ strict = true
 
 [tool.coverage.run]
 omit = ["*/test_*.py"]
+include = ["**/main.py"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
