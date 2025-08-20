@@ -2,7 +2,6 @@ import string
 import uuid
 from typing import Final
 
-
 class Base62:
     BASE: Final[str] = string.ascii_letters + string.digits
     BASE_LEN: Final[int] = len(BASE)
@@ -20,6 +19,5 @@ class Base62:
             num, remainder = divmod(num, cls.BASE_LEN)
             result.append(cls.BASE[remainder])
         return "".join(result)
-
 
 print(Base62.encode(uuid.uuid4().int))  # "ab"
