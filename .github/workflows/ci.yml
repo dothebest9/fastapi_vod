@@ -55,7 +55,7 @@ jobs:
       - name: Install dependencies
         run: poetry install --no-root
 
-      - name: Run tests
+      - name: Run tests and create coverage report
         run: |
           poetry run coverage run -m pytest .
           poetry run coverage report -m
